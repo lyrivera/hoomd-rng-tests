@@ -19,7 +19,7 @@
 #include <hip/hip_runtime.h>
 #endif
 
-#include <hoomd/extern/random123/include/Random123/philox.h>
+#include "random123/include/Random123/philox.h"
 
 namespace r123 {
 // from random123/examples/uniform.hpp

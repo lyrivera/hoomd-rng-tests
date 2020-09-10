@@ -18,8 +18,8 @@
 
 // for builds on systems where CUDA is not available, include copies of the CUDA header
 // files which define the vector types (float4, etc...)
-#include "hoomd/extern/cudacpu_vector_types.h"
-#include "hoomd/extern/cudacpu_vector_functions.h"
+#include "cudacpu_vector_types.h"
+#include "cudacpu_vector_functions.h"
 
 //! Define complex type
 typedef float2 hipfftComplex;
@@ -29,15 +29,6 @@ typedef double2 hipfftDoubleComplex;
 
 // bring in math.h
 #ifndef __HIPCC__
-
-// define HOOMD_LLVMJIT_BUILD to prevent the need for python and pybind includes
-// this simplifies LLVM code generation
-#ifndef HOOMD_LLVMJIT_BUILD
-// include python.h first to silence _XOPEN_SOURCE redefinition warnings
-#include <Python.h>
-#include <pybind11/pybind11.h>
-#endif
-
 #include <cmath>
 #include <math.h>
 #endif
@@ -371,13 +362,6 @@ HOSTDEVICE inline bool operator!= (const int3 &a, const int3 &b)
     {
     return (a.x != b.x || a.y != b.y || a.z != b.z );
     }
-
-//! Export relevant hoomd math functions to python
-#ifndef __HIPCC__
-#ifndef HOOMD_LLVMJIT_BUILD
-void export_hoomd_math_functions(pybind11::module& m);
-#endif
-#endif
 
 //! Small epsilon value
 const Scalar EPSILON=1.0e-6;
