@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
         ofstream output_file(argv[1], ios::binary | ios::out);
         for (int i=0; i<10000000; i++)
             {
-            RandomGenerator rng = RandomGenerator(i);
+            RandomGenerator rng = RandomGenerator(45,142424,i);
             auto number = detail::generate_u32(rng);
             output_file.write((char*) &number, sizeof(number));
             }
